@@ -36,6 +36,7 @@
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
+
 .profile-section {
     text-align: center;
     padding: 30px;
@@ -227,4 +228,55 @@
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s ease;
+}
+
+
+.right_frame {
+    position: relative;
+    width: 108px;
+    height: 1315px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.right-navigation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 260px;
+    gap: 35px;
+}
+
+.nav-item {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f5f5f5;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.nav-item:hover {
+    background: #FFB400;
+    color: white;
+}
+
+.nav-item i {
+    font-size: 24px;
+    color: #767676;
+}
+
+.nav-item.active {
+    background: #FFB400;
+}
+
+.nav-item.active i {
+    color: white;
 }

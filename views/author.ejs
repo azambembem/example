@@ -1,337 +1,241 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/main.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-
-
-
-    <title>Portfolio</title>
-</head>
-
-
-<!-- <body>
-    <div class="frame">
-        <div class="main-frame">
-            <div class="left_frame">
-                <div class="left_1">
-                    <div class="left_1-1">
-                        <img src="images/profile_img.png" width="156px" height="142px" alt="images" />
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main.css">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <title>Portfolio</title>
+    </head>
+    <body>
+        <div class="frame">
+            <div class="main-frame">
+                <div class="left_frame">
+                    <div class="profile-section">
+                        <img src="images/profile.svg" alt="Profile" class="profile-img">
+                        <h2 class="profile-name"><%=user.name%></h2>
+                        <p class="profile-title"><%=user.profession%></p>
+                        <div class="social-icons">
+                            <a class="link_href" href="">
+                                <div class="icon">
+                                    <img src="icon/facebook.svg" alt="">
+                                
+                                </div>
+                            </a>
+                            <a class="link_href" href="">
+                                <div class="icon">
+                                    <img src="icon/instagram.svg" alt="">
+                                
+                                </div>
+                            </a>
+                            <a class="link_href" href="">
+                                <div class="icon">
+                                    <img src="icon/linkedin.svg" alt="">
+                                
+                                </div>
+                            </a>
+                            <a class="link_href" href="">
+                                <div class="icon">
+                                    <img src="icon/twitter.svg" alt="">
+                                
+                                </div>
+                            </a>
+                            <a class="link_href" href="">
+                                <div class="icon">
+                                    <img src="icon/youtube.svg" alt="">
+                                
+                                </div>
+                            </a>
+                            <a class="link_href" href="">
+                                <div class="icon">
+                                    <img src="icon/dribbble.svg" alt="">
+                                
+                                </div>
+                            </a>
+                    
+                        </div>
                     </div>
-                    <div class="left_1-2">
-                        <%=user.name%>
+
+                    <div class="info-section">
+                        <div class="info-item">
+                            <span class="info-label">Age:</span>
+                            <span class="info-value"><%=user.age%></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Residence:</span>
+                            <span class="info-value"><%=user.residence%></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Freelance:</span>
+                            <span class="info-value"><%=user.freelance%></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Address:</span>
+                            <span class="info-value"><%=user.adress%></span>
+                        </div>
                     </div>
-                    <div class="left_1-3"><%=user.profession%></div>
-                    <div class="left-icons">
-                        <a class="link_href" href="">
-                            <div class="icon">
-                                <img src="icon/ins.svg" alt="" class="icon-1">
-                               
+
+                    <div class="languages-section">
+                        <h3>Languages</h3>
+                    
+                        <% user.languages.forEach(function(language, index) { %>
+                            <div class="language-item">
+                                <div class="language-name">
+                                    <span><%= language %></span>
+                                    <span><%= 100 - index * 10 %>%</span>
+                                </div>
+                                <div class="progress-bar" style="width: <%= 100 - index * 10 %>%"></div> 
                             </div>
-                        </a>
-                        <a class="link_href" href="">
-                            <div class="icon">
-                                <img src="icon/ins.svg" alt="" class="icon-1">
-                               
+                        <% }) %>
+                    </div>
+
+                    <div class="skills-section">
+                        <h3>Skills</h3>
+                    
+                        <% const skills = ["Html", "Css", "JS", "NodeJS", "Python"]; %>
+                        <% const percentages = [90, 85, 80, 75, 70]; %> 
+                    
+                        <% skills.forEach(function(skill, index) { %>
+                            <div class="skill-item">
+                                <div class="language-name">
+                                    <span><%= skill %></span>
+                                    <span><%= percentages[index] %>%</span>
+                                </div>
+                                <div class="progress-bar" style="width: <%= percentages[index] %>%"></div>
                             </div>
-                        </a>
-                        <a class="link_href" href="">
-                            <div class="icon">
-                                <img src="icon/ins.svg" alt="" class="icon-1">
-                               
+                        <% }) %>
+                    </div>
+
+                    <div class="extra-skills-section" style="padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <h3 style="font-size: 18px; margin-bottom: 20px; color: #2B2B2B;">Extra Skills</h3>
+                        
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <% user.extra_skills.forEach(function(skill) { %>
+                                <li style="display: flex; align-items: center; margin-bottom: 15px; color: #767676;">
+                                    <span class="skill-icon" style="width: 24px; height: 24px; margin-right: 10px; display: inline-flex; align-items: center; justify-content: center;">
+                                        <img src="icon/check.svg" alt="">
+                                    </span>
+                                    <%= skill %>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    
+                        <button class="download-cv-btn">
+                            <span style="margin-right: 8px;">DOWNLOAD CV</span>
+                            <span class="download-icon" style="width: 16px; height: 16px;">
+                            </span>
+                        </button>
+                    </div>
+
+                
+                </div>
+   
+                <div class="main-content">
+                    <div class="hero-section">
+                        <div class="hero-text">
+                            <h1>I'm Rayan AdIrdard<br><span>Front-end</span> Developer</h1>
+                            <p style="color: #767676;"><%=user.about_me%></p>
+                            <button class="hire-btn" style="color: black;">
+                                HIRE ME
+                                <i class="fa fa-arrow-right" style="margin-left: 10px;"></i>
+                            </button>
+                        </div>
+                        <div class="hero-image">
+                            <img src="images/person.svg" alt="Rayan">
+                        </div>
+                    </div>
+
+                    <div class="services-section">
+                        <h2 style="text-align: center;">My Services</h2>
+                        <p style="color: #767676; margin-top: 20px; text-align: center;">
+                            Amet Minim Mollit Non Deserunt Ullamco Est Sit Aliqua Dolor<br>
+                            Do Amet Sint. Velit Officia Consequat Duis Enim Velit Mollit.<br>
+                            Lorem Ipsum
+                        </p>
+                        
+                        <div class="services-grid">
+                            <div class="service-card">
+                                <img src="icon/computer.svg" alt="Web Development" class="service-icon">
+                                <h3 class="service-title">Web Development</h3>
+                                <p class="service-desc">Blog, E-commerce</p>
                             </div>
-                        </a>
-                        <a class="link_href" href="">
-                            <div class="icon">
-                                <img src="icon/ins.svg" alt="" class="icon-1">
-                               
+                            <div class="service-card">
+                                <img src="icon/illustration.svg" alt="UI/UX Design" class="service-icon">
+                                <h3 class="service-title">UI/UX Design</h3>
+                                <p class="service-desc">Mobile App, Website Design</p>
                             </div>
-                        </a>
-                        <a class="link_href" href="">
-                            <div class="icon">
-                                <img src="icon/ins.svg" alt="" class="icon-1">
-                               
+                            <div class="service-card">
+                                <img src="icon/microphone.svg" alt="Sound Design" class="service-icon">
+                                <h3 class="service-title">Sound Design</h3>
+                                <p class="service-desc">Voice Over, Beat Making</p>
                             </div>
-                        </a>
-                        <a class="link_href" href="">
-                            <div class="icon">
-                                <img src="icon/ins.svg" alt="" class="icon-1">
-                               
+                            <div class="service-card">
+                                <img src="icon/game-development.svg" alt="Game Design" class="service-icon">
+                                <h3 class="service-title">Game Design</h3>
+                                <p class="service-desc">Character Design, Props & Objects</p>
                             </div>
-                        </a>
+                            <div class="service-card">
+                                <img src="icon/photographer.svg" alt="Photography" class="service-icon">
+                                <h3 class="service-title">Photography</h3>
+                                <p class="service-desc">Portrait, Product Photography</p>
+                            </div>
+                            <div class="service-card">
+                                <h3 class="service-title">Advertising</h3>
+                                <p class="service-desc">Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Vitae Nulla Diam In Ac Dictum A Urna Viverra Morbi.</p><br>
+                                <h5 style="color: #FFB400;">ORDER NOW ></h5>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="marginer">1</div>
-                <div class="left_2">1</div>
-                <div class="marginer">1</div>
-                <div class="left_3">1</div>
-                <div class="marginer">1</div>
-                <div class="left_4">1</div>
-                <div class="marginer">1</div>
-                <div class="left_5">1</div>
-                <div class="marginer">1</div>
-
-
-            </div>
-            <div class="midd_frame"></div>
-            <div class="right_frame"></div>
-        </div>
-    </div>
-</body> -->
-
-<body>
-    <div class="frame">
-        <div class="main-frame">
-            <div class="left_frame">
-                <div class="profile-section">
-                    <img src="images/profile.svg    " alt="Profile" class="profile-img">
-                    <h2 class="profile-name"><%=user.name%></h2>
-                    <p class="profile-title"><%=user.profession%></p>
-                    <div class="social-icons">
+                <div class="right_frame">
+                    <div class="right-navigation">
                         <a class="link_href" href="">
-                            <div class="icon">
+                            <div class="nav-item active">
                                 <img src="icon/facebook.svg" alt="">
-                               
+                            
                             </div>
                         </a>
                         <a class="link_href" href="">
-                            <div class="icon">
-                                <img src="icon/instagram.svg" alt="">
-                               
+                            <div class="nav-item active">
+                                <img src="icon/facebook.svg" alt="">
+                            
                             </div>
                         </a>
                         <a class="link_href" href="">
-                            <div class="icon">
-                                <img src="icon/linkedin.svg" alt="">
-                               
+                            <div class="nav-item active">
+                                <img src="icon/facebook.svg" alt="">
+                            
                             </div>
                         </a>
                         <a class="link_href" href="">
-                            <div class="icon">
-                                <img src="icon/twitter.svg" alt="">
-                               
+                            <div class="nav-item active">
+                                <img src="icon/facebook.svg" alt="">
+                            
                             </div>
                         </a>
                         <a class="link_href" href="">
-                            <div class="icon">
-                                <img src="icon/youtube.svg" alt="">
-                               
+                            <div class="nav-item active">
+                                <img src="icon/facebook.svg" alt="">
+                            
                             </div>
                         </a>
                         <a class="link_href" href="">
-                            <div class="icon">
-                                <img src="icon/dribbble.svg" alt="">
-                               
+                            <div class="nav-item active">
+                                <img src="icon/facebook.svg" alt="">
+                            
                             </div>
                         </a>
-                  
-                    </div>
-                </div>
-
-                <div class="info-section">
-                    <div class="info-item">
-                        <span class="info-label">Age:</span>
-                        <span class="info-value"><%=user.age%></span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Residence:</span>
-                        <span class="info-value"><%=user.residence%></span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Freelance:</span>
-                        <span class="info-value"><%=user.freelance%></span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-label">Address:</span>
-                        <span class="info-value"><%=user.adress%></span>
-                    </div>
-                </div>
-
-                <div class="languages-section">
-                    <h3>Languages</h3>
-                
-                    <% user.languages.forEach(function(language, index) { %>
-                        <div class="language-item">
-                            <div class="language-name">
-                                <span><%= language %></span>
-                                <span><%= 100 - index * 10 %>%</span>
-                            </div>
-                            <div class="progress-bar" style="width: <%= 100 - index * 10 %>%"></div> 
-                        </div>
-                    <% }) %>
-                </div>
-                
-                <!-- <div class="skills-section">
-                    <h3>Skills</h3>
-                    <div class="skill-item">
-                        <div class="language-name">
-                            <span>Html</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="progress-bar" style="width: 90%"></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="language-name">
-                            <span>CSS</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="progress-bar" style="width: 85%"></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="language-name">
-                            <span>Js</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="progress-bar" style="width: 80%"></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="language-name">
-                            <span>PHP</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="progress-bar" style="width: 75%"></div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="language-name">
-                            <span>WordPress</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="progress-bar" style="width: 85%"></div>
-                    </div>
-                </div> -->
-
-
-
-                <div class="skills-section">
-                    <h3>Skills</h3>
-                
-                    <% const skills = ["Html", "Css", "JS", "NodeJS", "Python"]; %>
-                    <% const percentages = [90, 85, 80, 75, 70]; %> 
-                
-                    <% skills.forEach(function(skill, index) { %>
-                        <div class="skill-item">
-                            <div class="language-name">
-                                <span><%= skill %></span>
-                                <span><%= percentages[index] %>%</span>
-                            </div>
-                            <div class="progress-bar" style="width: <%= percentages[index] %>%"></div>
-                        </div>
-                    <% }) %>
-                </div>
-                
-                
-<!--                 
-                <div class="extra-skills-section" style="padding: 30px;">
-                    <h3>Extra Skills</h3>
-                    <ul style="list-style: none; margin-top: 15px;">
-                        <li style="margin-bottom: 10px;">✓ Bootstrap, Materialize</li>
-                        <li style="margin-bottom: 10px;">✓ Stylus, Sass, Less</li>
-                        <li style="margin-bottom: 10px;">✓ Gulp, Webpack, Grunt</li>
-                        <li style="margin-bottom: 10px;">✓ GIT Knowledge</li>
-                    </ul>
-                </div> -->
-
-                <!-- <div class="extra-skills-section" style="padding: 30px;">
-                    <h3>Extra Skills</h3>
-
-                    <ul style="list-style: none; margin-top: 15px;">
-                        <% user.extra_skills.forEach(function(skill) { %>
-                            <li style="margin-bottom: 10px;">    <%= skill %></li>
-                        <% }) %>
-                    </ul>
-                    <div style="padding-left: 20px; padding-right: 20px; padding-top: 20px;">
-                        <button class="hire-btn" style="width: 100%; color: black;">
-                            DOWNLOAD CV
-                            <i class="fa fa-download" style="margin-left: 10px; color: black;"></i>
-                        </button>
-                    </div>
-                </div> -->
-                
-                <div class="extra-skills-section" style="padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                    <h3 style="font-size: 18px; margin-bottom: 20px; color: #2B2B2B;">Extra Skills</h3>
-                    
-                    <ul style="list-style: none; padding: 0; margin: 0;">
-                        <% user.extra_skills.forEach(function(skill) { %>
-                            <li style="display: flex; align-items: center; margin-bottom: 15px; color: #767676;">
-                                <span class="skill-icon" style="width: 24px; height: 24px; margin-right: 10px; display: inline-flex; align-items: center; justify-content: center;">
-                                    <img src="icon/check.svg" alt="">
-                                </span>
-                                <%= skill %>
-                            </li>
-                        <% }) %>
-                    </ul>
-                
-                    <button class="download-cv-btn">
-                        <span style="margin-right: 8px;">DOWNLOAD CV</span>
-                        <span class="download-icon" style="width: 16px; height: 16px;">
-                        </span>
-                    </button>
-                </div>
-
-            
-            </div>
-
-            <div class="main-content">
-                <div class="hero-section">
-                    <div class="hero-text">
-                        <h1>I'm Rayan AdIrdard<br><span>Front-end</span> Developer</h1>
-                        <p style="color: #767676;"><%=user.about_me%></p>
-                        <button class="hire-btn" style="color: black;">
-                            HIRE ME
-                            <i class="fa fa-arrow-right" style="margin-left: 10px;"></i>
-                        </button>
-                    </div>
-                    <div class="hero-image">
-                        <img src="images/person.svg" alt="Rayan">
-                    </div>
-                </div>
-
-                <div class="services-section">
-                    <h2 style="text-align: center;">My Services</h2>
-                    <p style="color: #767676; margin-top: 20px; text-align: center;">
-                        Amet Minim Mollit Non Deserunt Ullamco Est Sit Aliqua Dolor<br>
-                        Do Amet Sint. Velit Officia Consequat Duis Enim Velit Mollit.<br>
-                        Lorem Ipsum
-                    </p>
-                    
-                    <div class="services-grid">
-                        <div class="service-card">
-                            <img src="icon/computer.svg" alt="Web Development" class="service-icon">
-                            <h3 class="service-title">Web Development</h3>
-                            <p class="service-desc">Blog, E-commerce</p>
-                        </div>
-                        <div class="service-card">
-                            <img src="icon/illustration.svg" alt="UI/UX Design" class="service-icon">
-                            <h3 class="service-title">UI/UX Design</h3>
-                            <p class="service-desc">Mobile App, Website Design</p>
-                        </div>
-                        <div class="service-card">
-                            <img src="icon/microphone.svg" alt="Sound Design" class="service-icon">
-                            <h3 class="service-title">Sound Design</h3>
-                            <p class="service-desc">Voice Over, Beat Making</p>
-                        </div>
-                        <div class="service-card">
-                            <img src="icon/game-development.svg" alt="Game Design" class="service-icon">
-                            <h3 class="service-title">Game Design</h3>
-                            <p class="service-desc">Character Design, Props & Objects</p>
-                        </div>
-                        <div class="service-card">
-                            <img src="icon/photographer.svg" alt="Photography" class="service-icon">
-                            <h3 class="service-title">Photography</h3>
-                            <p class="service-desc">Portrait, Product Photography</p>
-                        </div>
-                        <div class="service-card">
-                            <h3 class="service-title">Advertising</h3>
-                            <p class="service-desc">Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Vitae Nulla Diam In Ac Dictum A Urna Viverra Morbi.</p><br>
-                            <h5 style="color: #FFB400;">ORDER NOW ></h5>
-                        </div>
+                        
+                        <!-- <div class="nav-item active"><i class="fa fa-home"></i></div>
+                        <div class="nav-item"><i class="fa fa-user"></i></div>
+                        <div class="nav-item"><i class="fa fa-briefcase"></i></div>
+                        <div class="nav-item"><i class="fa fa-envelope"></i></div>
+                        <div class="nav-item"><i class="fa fa-briefcase"></i></div>
+                        <div class="nav-item"><i class="fa fa-envelope"></i></div> -->
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</body>
-</html>
+    </body>
+    </html>
