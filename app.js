@@ -1,11 +1,18 @@
-console.log("Web serverni boshlash");
 const express = require("express");
 const app = express();
 const fs = require("fs");
 const path = require("path");
-// const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
+// const { db } = require("./server");
+// const mongoose = require("./server.js");
 
-// const db = require("./server").db();
+// const db = require("./server").mongoose();
+
+const planSchema = new mongoose.Schema({
+  reja: { type: String, required: true }
+});
+
+const Plan = mongoose.model("Plan", planSchema);
 
 let user;
 
@@ -38,9 +45,33 @@ app.set("view engine", "ejs");
 
 // 4 Route qismi
 
+// app.post("/create-item", (req, res) => {
+//   const new_reja = req.body.reja;
+//   db.first_collection("plans").insertOne({ reja: new_reja }, (err, data) => {
+//     if (err) {
+//       console.log(err);
+//       res.send("Something went wrong!");
+//     } else {
+//       res.send("Reja added successfully!");
+//     }
+//   });
+//   console.log(req.body);
+//   res.json({ status: "success" });
+// });
+
 app.post("/create-item", (req, res) => {
-  console.log(req.body);
-  res.json({ status: "success" });
+  const new_reja = req.body.reja;
+
+  const newPlan = new Plan({ reja: new_reja });
+  newPlan
+    .save()
+    .then(() => {
+      res.send("Reja added successfully!");
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send("Something went wrong!");
+    });
 });
 
 app.get("/author", (req, res) => {
@@ -51,8 +82,30 @@ app.get("/", (req, res) => {
   res.render("harid");
 });
 
+// app.get("/reja", (req, res) => {
+//   db.first_collection("plans")
+//     .find()
+//     .toArray((err, data) => {
+//       if (err) console.log(err);
+//       else {
+//         console.log(data);
+//         res.render("reja");
+//       }
+//     });
+// });
+
 app.get("/reja", (req, res) => {
-  res.render("reja");
+  Plan.find()
+    .then((data) => {
+      console.log(data);
+      res.render("reja", { plans: data });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send("Something went wrong!");
+    });
+  console.log(data);
+  res.render("reja", { items: data });
 });
 
 module.exports = app;
