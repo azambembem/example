@@ -101,13 +101,29 @@
 // }
 // run();
 
-// task
+// task A
 
-function countLetter(lett, word) {
-  return word.split("").filter((char) => char === lett).length;
+// function countLetter(lett, word) {
+//   return word.split("").filter((char) => char === lett).length;
+// }
+
+// const result0 = countLetter("e", "engineer");
+// const result1 = countLetter("o", "book");
+// console.log("result0:", result0); // result0: 3
+// console.log("result1:", result1); // result1: 2
+
+// task B
+
+function countDigits(str) {
+  let count = 0;
+  for (let char of str) {
+    if (!isNaN(char) && char !== " ") {
+      count++;
+    }
+  }
+  return count;
 }
 
-const result0 = countLetter("e", "engineer");
-const result1 = countLetter("o", "book");
-console.log("result0:", result0); // result0: 3
-console.log("result1:", result1); // result1: 2
+console.log(countDigits("FDSFW4335SD")); // 4
+console.log(countDigits("HEY1 WHATSUP 123 BRO 456")); // 7
+console.log(countDigits("YUQ BUYERDA RAQAM")); // 0
