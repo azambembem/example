@@ -1,32 +1,24 @@
 const http = require("http");
-const { default: mongoose } = require("mongoose");
-const app = require("./app");
+const { MongoClient } = require("mongodb");
 
-// const mongoose = require("mongoose");
-// const { config } = require("dotenv");
-// config();
-// let db;
-// mongo db atlas
-mongoose
-  .connect(
-    "mongodb+srv://kokokoko123:azamaws1020@cluster0.hmmxd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
-  )
-  .then(() => console.log("Connected to to Atlas"))
-  .catch((err) => console.log(err));
+const connectionString =
+  "mongodb+srv://kokokoko123:azamaws1020@cluster0.hmmxd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-// mongoose
-//   .connect(process.env.MONGODB_URL)
-//   .then(() => console.log("Connected to Mongo"))
-//   .catch((err) => console.log(err));
+MongoClient.connect(connectionString)
+  .then((client) => {
+    console.log("✅ databasega mufavvaqiyatli ulandi");
 
-// const db = mongoose.connection;
+    const db = client.db(); // database object olib kelish
+    module.exports = db; // db obj yuborish
 
-const server = http.createServer(app);
+    const app = require("./app");
+    const server = http.createServer(app);
+    let PORT = 3000;
 
-// module.exports = db;
-
-const PORT = 3000;
-
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT} http://localhost:${PORT}`);
-});
+    server.listen(PORT, function () {
+      console.log(`The server is running on http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("ERROR on connection MongoDB:", err);
+  });
