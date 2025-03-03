@@ -114,16 +114,26 @@
 
 // task B
 
-function countDigits(str) {
-  let count = 0;
-  for (let char of str) {
-    if (!isNaN(char) && char !== " ") {
-      count++;
-    }
-  }
-  return count;
+// function countDigits(str) {
+//   let count = 0;
+//   for (let char of str) {
+//     if (!isNaN(char) && char !== " ") {
+//       count++;
+//     }
+//   }
+//   return count;
+// }
+
+// console.log(countDigits("FDSFW4335SD")); // 4
+// console.log(countDigits("HEY1 WHATSUP 123 BRO 456")); // 7
+// console.log(countDigits("YUQ BUYERDA RAQAM")); // 0
+
+// task C
+
+function checkContent(str1, str2) {
+  return str1.split("").sort().join("") === str2.split("").sort().join("");
 }
 
-console.log(countDigits("FDSFW4335SD")); // 4
-console.log(countDigits("HEY1 WHATSUP 123 BRO 456")); // 7
-console.log(countDigits("YUQ BUYERDA RAQAM")); // 0
+// Test
+console.log(checkContent("mitgroup", "gmtiprou")); // true
+console.log(checkContent("hello", "world")); // false
