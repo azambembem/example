@@ -11,26 +11,52 @@ app.use(express.urlencoded({ extended: true }));
 app.set("views", "views");
 app.set("view engine", "ejs");
 
+// app.post("/create-item", async (req, res) => {
+//   try {
+//     const new_reja = req.body.reja;
+//     await db.collection("plans").insertOne({ reja: new_reja }, (err, data) => {
+//       res.json(data.ops[0]);
+//     });
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).send("Database insertion error");
+//   }
+// });
+
 app.post("/create-item", async (req, res) => {
   try {
     const new_reja = req.body.reja;
-    await db.collection("plans").insertOne({ reja: new_reja }, (err, data) => {
-      res.json(data.ops[0]);
-    });
+    const result = await db.collection("plans").insertOne({ reja: new_reja });
+    res.json(
+      result.ops ? result.ops[0] : { _id: result.insertedId, reja: new_reja }
+    );
   } catch (err) {
     console.log(err);
     res.status(500).send("Database insertion error");
   }
 });
 
-app.post("/delete-item", (req, res) => {
-  const id = req.body.id;
-  db.collection("plans").deleteOne(
-    { _id: new mongodb.ObjectId(id.toString()) },
-    function (err, data) {
-      res.json({ state: "success" });
-    }
-  );
+// app.post("/delete-item", (req, res) => {
+//   const id = req.body.id;
+//   db.collection("plans").deleteOne(
+//     { _id: new mongodb.ObjectId(id.toString()) },
+//     function (err, data) {
+//       res.json({ state: "success" });
+//     }
+//   );
+// });
+
+app.post("/delete-item", async (req, res) => {
+  try {
+    const id = req.body.id;
+    await db
+      .collection("plans")
+      .deleteOne({ _id: new mongodb.ObjectId(id.toString()) });
+    res.json({ state: "success" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ state: "error" });
+  }
 });
 
 app.get("/", async (req, res) => {
