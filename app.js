@@ -59,6 +59,30 @@ app.post("/delete-item", async (req, res) => {
   }
 });
 
+app.post("/edit-item", async (req, res) => {
+  try {
+    const data = req.body;
+    console.log(data);
+    await db.collection("plans").findOneAndUpdate(
+      {
+        _id: new mongodb.ObjectId(data.id)
+      },
+      { $set: { reja: data.new_input } }
+    );
+    res.json({ state: "success" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ state: "error" });
+  }
+});
+
+app.post("/delete-all", (req, res) => {
+  if (req.body.delete_all) {
+    db.collection("plans").deleteMany();
+    res.json({ state: "hamma rejalar delete buldi" });
+  }
+});
+
 app.get("/", async (req, res) => {
   try {
     const data = await db.collection("plans").find().toArray();

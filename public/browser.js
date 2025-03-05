@@ -34,6 +34,8 @@ document.getElementById("create-form").addEventListener("submit", function (e) {
     });
 });
 
+// edit
+
 document.addEventListener("click", function (e) {
   //delete
   if (e.target.classList.contains("delete-me")) {
@@ -49,4 +51,35 @@ document.addEventListener("click", function (e) {
         });
     }
   }
+  // edit
+  if (e.target.classList.contains("edit-me")) {
+    let userInput = prompt(
+      "Ozgartirish kiriting",
+      e.target.parentElement.parentElement.querySelector(".item-text").innerHTML
+    );
+    if (userInput) {
+      axios
+        .post("/edit-item", {
+          id: e.target.getAttribute("data-id"),
+          new_input: userInput
+        })
+        .then((response) => {
+          console.log(response.data);
+          e.target.parentElement.parentElement.querySelector(
+            ".item-text"
+          ).innerHTML = userInput;
+        })
+        .catch((err) => {
+          console.log("Iltimos qaytadan kiriting!!!");
+        });
+    }
+  }
+});
+
+// all delete
+document.getElementById("clean-all").addEventListener("click", () => {
+  axios.post("/delete-all", { delete_all: true }).then((response) => {
+    alert(response.data.state);
+    document.location.reload();
+  });
 });
