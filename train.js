@@ -130,10 +130,54 @@
 
 // task C
 
-function checkContent(str1, str2) {
-  return str1.split("").sort().join("") === str2.split("").sort().join("");
-}
+// function checkContent(str1, str2) {
+//   return str1.split("").sort().join("") === str2.split("").sort().join("");
+// }
 
-// Test
-console.log(checkContent("mitgroup", "gmtiprou")); // true
-console.log(checkContent("hello", "world")); // false
+// // Test
+// console.log(checkContent("mitgroup", "gmtiprou")); // true
+// console.log(checkContent("hello", "world")); // false
+
+// task D
+
+class Shop {
+  constructor(non, lagmon, cola) {
+    // this.non = non;
+    // this.lagmon = lagmon;
+    // this.cola = cola;
+    this.products = { non, lagmon, cola };
+  }
+  logTime() {
+    const now = new Date();
+    return `Current time: ${now.getHours()} : ${now
+      .getMinutes()
+      .toString()
+      .padStart(2, 0)} `; // agar daqiqa 1 xonali bulsa, oldiga "0" qo'shadi
+  }
+  qoldiq() {
+    console.log(
+      // logTime() => hozirgi vaqt
+      // this.products => ombordagi maxsulot
+      `${this.logTime()}, Non: ${this.products.non}, Lagmon: ${
+        this.products.lagmon
+      }, Cola: ${this.products.cola}`
+    );
+  }
+  sotish(mahsulot, soni) {
+    if (this.products[mahsulot] >= soni) {
+      this.products[mahsulot] -= soni;
+      console.log(`${this.logTime()} ${soni} ta ${mahsulot} sotildi`);
+    } else {
+      console.log(`${this.logTime()} yetarlicha ${mahsulot} yuq!!`);
+    }
+  }
+  qabul(mahsulot, soni) {
+    this.products[mahsulot] += soni;
+    console.log(`${this.logTime()} ${soni} ta ${mahsulot} qabul qilindi`);
+  }
+}
+const shop = new Shop(4, 5, 2);
+shop.qoldiq();
+shop.sotish("non", 3);
+shop.qabul("cola", 4);
+shop.qoldiq();
